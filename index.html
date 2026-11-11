@@ -521,12 +521,17 @@ window.CoBrowsingCustomStrings = {
 };
 </script>
 <script>
+// Mode Co-browse réglable pour la démo : ?mode=full-control | partial-control | no-control
+// Toute autre valeur retombe sur full-control.
+var cbModes = ['full-control', 'partial-control', 'no-control'];
+var cbMode = new URLSearchParams(location.search).get('mode');
+if (cbModes.indexOf(cbMode) === -1) { cbMode = 'full-control'; }
 (function(e,i,g,h,t,c,o,b,r,w){r=i.createElement(g);r.setAttribute(h,c);
 o&&Object.keys(o).map(function(k){r.setAttribute(k,o[k])});
 r.async=1;r.src='https://'+t+'/license'+c+'/dist/primary-bundle.js';
 w=i.getElementsByTagName(g)[0];w.parentNode.insertBefore(r,w);
 })(window,document,'script','data-8x8-co-browsing','cb.8x8.com','64b191796da2a0004d8021b6',{
-  'data-8x8-co-browsing-mode':'full-control'
+  'data-8x8-co-browsing-mode': cbMode
 });
 </script>
 </body>
