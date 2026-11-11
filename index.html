@@ -135,6 +135,26 @@
   .actu a:hover h3 { text-decoration: underline; text-decoration-color: var(--soleil); text-decoration-thickness: 3px; text-underline-offset: 4px; }
   .actu p { margin-top: 10px; color: var(--gris); font-size: 16px; }
 
+  /* Devis */
+  .devis { background: var(--ciel); }
+  .devis-grille { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .devis-grille > div > p { margin-top: 18px; max-width: 46ch; color: var(--gris); }
+  .devis-grille .astuce { margin-top: 24px; padding: 16px 20px; border-left: 4px solid var(--soleil); background: var(--blanc); border-radius: 0 14px 14px 0; font-size: 15px; color: var(--texte); }
+  form.carte { background: var(--blanc); border-radius: var(--rayon); padding: clamp(24px, 4vw, 40px); display: grid; gap: 20px; }
+  .champ { display: grid; gap: 6px; }
+  .champ label, fieldset legend { font-weight: 700; font-size: 15px; color: var(--nuit); }
+  .champ small { color: var(--gris); font-size: 14px; }
+  .champ input[type="text"], .champ input[type="email"], .champ textarea { font: inherit; padding: 13px 16px; border: 2px solid var(--filet); border-radius: 14px; background: var(--blanc); color: var(--texte); width: 100%; }
+  .champ textarea { min-height: 110px; resize: vertical; }
+  .champ input:focus, .champ textarea:focus { border-color: var(--nuit); outline: none; }
+  fieldset { border: 0; display: grid; gap: 10px; }
+  .radios { display: flex; flex-wrap: wrap; gap: 10px; }
+  .radios label { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid var(--filet); border-radius: 999px; cursor: pointer; font-weight: 500; }
+  .radios input { accent-color: var(--nuit); }
+  .radios label:has(input:checked) { border-color: var(--nuit); background: var(--ciel); }
+  .confirmation { padding: 18px 20px; border-radius: 14px; background: #e3f4ea; color: #14532d; font-weight: 500; }
+  .confirmation[hidden] { display: none; }
+
   /* Contact */
   .contact { background: var(--nuit); color: var(--blanc); }
   .contact h2 { color: var(--blanc); }
@@ -245,17 +265,17 @@
         <article class="panneau p1">
           <h3>Particuliers</h3>
           <p>Habitation, santé, prévoyance, épargne : un conseiller vous explique vos garanties en termes simples et vous aide à choisir.</p>
-          <a class="btn" href="#contact">Découvrir nos solutions</a>
+          <a class="btn" href="#devis">Demander un devis</a>
         </article>
         <article class="panneau p2">
           <h3>Entreprises</h3>
           <p>Biens, responsabilités, flotte automobile, santé et prévoyance de vos salariés : nous protégeons durablement votre activité.</p>
-          <a class="btn" href="#contact">Découvrir nos solutions</a>
+          <a class="btn" href="#devis">Demander un devis</a>
         </article>
         <article class="panneau p3">
           <h3>Indépendants et TNS</h3>
           <p>Gérant ou mandataire social, vous avez besoin d'une protection sur mesure : prévoyance, complémentaire santé et retraite.</p>
-          <a class="btn" href="#contact">Découvrir nos solutions</a>
+          <a class="btn" href="#devis">Demander un devis</a>
         </article>
       </div>
     </div>
@@ -351,6 +371,45 @@
     </div>
   </section>
 
+  <section class="devis" id="devis">
+    <div class="conteneur devis-grille">
+      <div>
+        <h2>Demandez votre devis.</h2>
+        <p>Dites-nous ce dont vous avez besoin : un conseiller vous recontacte sous un jour ouvré. Si vous êtes déjà client, indiquez votre numéro de contrat.</p>
+        <p class="astuce">Démo Co-browse : le champ « Numéro de contrat » est masqué. Votre conseiller ne voit que des astérisques et ne peut pas le modifier.</p>
+      </div>
+      <form class="carte" id="form-devis" novalidate>
+        <fieldset>
+          <legend>Vous êtes</legend>
+          <div class="radios">
+            <label><input type="radio" name="profil" value="particulier" checked> Particulier</label>
+            <label><input type="radio" name="profil" value="entreprise"> Entreprise</label>
+            <label><input type="radio" name="profil" value="independant"> Indépendant / TNS</label>
+          </div>
+        </fieldset>
+        <div class="champ">
+          <label for="nom">Nom et prénom</label>
+          <input type="text" id="nom" name="nom" autocomplete="name">
+        </div>
+        <div class="champ">
+          <label for="email">Adresse email</label>
+          <input type="email" id="email" name="email" autocomplete="email">
+        </div>
+        <div class="champ">
+          <label for="contrat">Numéro de contrat</label>
+          <input type="text" id="contrat" name="contrat" class="maskContent" autocomplete="off" placeholder="Facultatif">
+          <small>Ce champ est masqué pour votre conseiller pendant le guidage en direct.</small>
+        </div>
+        <div class="champ">
+          <label for="message">Votre besoin</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <button class="btn" type="submit">Envoyer ma demande</button>
+        <p class="confirmation" id="confirmation" role="status" hidden>Merci, votre demande est bien enregistrée. Ceci est une démonstration : aucune donnée n'a été envoyée.</p>
+      </form>
+    </div>
+  </section>
+
   <section class="contact" id="contact">
     <div class="conteneur contact-grille">
       <div>
@@ -412,6 +471,12 @@
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { items.forEach(function (x) { x.parentElement.classList.remove('ouvert'); }); }
+  });
+
+  // Formulaire de démonstration : rien n'est envoyé, on affiche seulement une confirmation.
+  document.getElementById('form-devis').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('confirmation').hidden = false;
   });
 
   // Ouvre la popup Co-browse (fonction fournie par le script 8x8 chargé plus bas)
