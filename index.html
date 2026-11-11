@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hestia Courtage | Courtier indépendant en assurances</title>
+<meta name="description" content="Hestia Courtage, courtier indépendant en assurances pour les particuliers, les entreprises et les indépendants.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nuit: #1b2559;
+    --nuit-fonce: #131a40;
+    --ciel: #e9eefb;
+    --soleil: #f4b73f;
+    --blanc: #ffffff;
+    --texte: #1a1f36;
+    --gris: #5a6078;
+    --filet: rgba(27, 37, 89, .14);
+    --titre: "Fraunces", Georgia, "Times New Roman", serif;
+    --corps: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+    --rayon: 28px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+  body { font-family: var(--corps); font-size: 17px; line-height: 1.6; color: var(--texte); background: var(--blanc); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img, svg { max-width: 100%; display: block; }
+  :focus-visible { outline: 3px solid var(--soleil); outline-offset: 3px; }
+  .saut { position: absolute; left: -999px; top: 8px; background: var(--soleil); color: var(--nuit); padding: 10px 16px; z-index: 50; font-weight: 700; }
+  .saut:focus { left: 8px; }
+
+  .conteneur { width: min(1200px, 100% - 48px); margin-inline: auto; }
+
+  /* Boutons */
+  .btn { display: inline-block; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; text-decoration: none; padding: 14px 28px; border-radius: 999px; border: 2px solid var(--nuit); background: var(--nuit); color: var(--blanc); transition: background .2s, color .2s, border-color .2s; }
+  .btn:hover { background: var(--soleil); border-color: var(--soleil); color: var(--nuit); }
+  .btn.clair { background: transparent; color: var(--nuit); }
+  .btn.clair:hover { background: var(--nuit); border-color: var(--nuit); color: var(--blanc); }
+  .btn.soleil { background: var(--soleil); border-color: var(--soleil); color: var(--nuit); }
+  .btn.soleil:hover { background: var(--blanc); border-color: var(--blanc); }
+
+  /* En-tête */
+  header { position: sticky; top: 0; z-index: 30; background: var(--blanc); border-bottom: 1px solid var(--filet); }
+  .barre { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; }
+  .logo { font-family: var(--titre); font-weight: 600; font-size: 26px; color: var(--nuit); text-decoration: none; letter-spacing: -.01em; }
+  .logo span { color: var(--soleil); }
+  nav > ul { list-style: none; display: flex; gap: 8px; }
+  nav li { position: relative; }
+  nav li > a, nav li > button { font: inherit; font-weight: 500; font-size: 16px; background: none; border: 0; cursor: pointer; text-decoration: none; padding: 10px 14px; border-radius: 999px; display: block; color: var(--texte); }
+  nav li:hover > a, nav li:hover > button, nav li:focus-within > a, nav li:focus-within > button { background: var(--ciel); }
+  .sous { display: none; position: absolute; top: 100%; left: 0; min-width: 270px; background: var(--blanc); border: 1px solid var(--filet); border-radius: 18px; padding: 10px; box-shadow: 0 18px 40px rgba(19, 26, 64, .14); list-style: none; }
+  nav li:hover > .sous, nav li:focus-within > .sous { display: block; }
+  .sous a { display: block; padding: 10px 14px; border-radius: 10px; text-decoration: none; font-size: 15px; }
+  .sous a:hover { background: var(--ciel); }
+  .droite { display: flex; gap: 10px; align-items: center; }
+  .droite .btn { padding: 10px 20px; font-size: 15px; }
+  .menu-btn { display: none; }
+
+  /* Hero */
+  .hero { background: var(--ciel); overflow: hidden; }
+  .hero-grille { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding-block: clamp(48px, 8vw, 104px); }
+  h1 { font-family: var(--titre); font-weight: 600; font-size: clamp(40px, 5.6vw, 76px); line-height: 1.03; letter-spacing: -.02em; color: var(--nuit); }
+  .hero p { margin-top: 26px; max-width: 52ch; font-size: 19px; color: var(--texte); }
+  .actions { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .scene { width: 100%; max-width: 520px; justify-self: end; }
+  .ballon { transform-origin: 50% 90%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ballon { animation: flotte 7s ease-in-out infinite; }
+    @keyframes flotte { 50% { transform: translateY(-14px) rotate(1.5deg); } }
+  }
+
+  h2 { font-family: var(--titre); font-weight: 600; font-size: clamp(30px, 3.8vw, 50px); line-height: 1.08; letter-spacing: -.015em; color: var(--nuit); }
+  h3 { font-family: var(--titre); font-weight: 600; font-size: 28px; line-height: 1.12; }
+  section { padding-block: clamp(56px, 8vw, 112px); }
+
+  /* Besoins */
+  .besoins-tete { max-width: 60ch; }
+  .besoins-tete p { margin-top: 16px; color: var(--gris); }
+  .panneaux { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .panneau { border-radius: var(--rayon); padding: 36px 32px 32px; display: flex; flex-direction: column; min-height: 380px; }
+  .panneau p { margin-top: 16px; flex: 1; }
+  .panneau a.btn { margin-top: 28px; align-self: flex-start; }
+  .panneau.p1 { background: var(--ciel); color: var(--nuit); }
+  .panneau.p2 { background: var(--nuit); color: var(--blanc); border-radius: 80px var(--rayon) var(--rayon) var(--rayon); }
+  .panneau.p3 { background: var(--soleil); color: var(--nuit); border-radius: var(--rayon) var(--rayon) 80px var(--rayon); }
+  .panneau.p2 .btn { background: var(--soleil); border-color: var(--soleil); color: var(--nuit); }
+  .panneau.p2 .btn:hover { background: var(--blanc); border-color: var(--blanc); }
+  .panneau.p3 .btn:hover { background: var(--nuit); border-color: var(--nuit); color: var(--blanc); }
+
+  /* Chiffres */
+  .chiffres { background: var(--nuit); color: var(--blanc); padding-block: clamp(48px, 6vw, 80px); }
+  .chiffres-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .chiffres strong { display: block; font-family: var(--titre); font-weight: 600; font-size: clamp(44px, 6vw, 80px); line-height: 1; color: var(--soleil); }
+  .chiffres span { display: block; margin-top: 10px; max-width: 26ch; color: rgba(255,255,255,.86); }
+
+  /* Témoignages */
+  .temoignages-grille { margin-top: 44px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 20px; }
+  figure { border-radius: var(--rayon); padding: 32px; background: var(--ciel); display: flex; flex-direction: column; gap: 22px; }
+  figure.grand { background: var(--nuit); color: var(--blanc); }
+  blockquote { font-family: var(--titre); font-size: 21px; line-height: 1.4; flex: 1; }
+  figure.grand blockquote { font-size: 26px; }
+  figcaption { font-size: 15px; }
+  figcaption strong { display: block; }
+  figure:not(.grand) figcaption { color: var(--gris); }
+  figure.grand figcaption { color: rgba(255,255,255,.8); }
+
+  /* Services */
+  .services { background: var(--ciel); }
+  .services-grille { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .service { background: var(--blanc); border-radius: var(--rayon); padding: 36px; display: flex; flex-direction: column; gap: 14px; }
+  .service .grand-chiffre { font-family: var(--titre); font-weight: 600; font-size: 56px; line-height: 1; color: var(--nuit); }
+  .service .btn { align-self: flex-start; margin-top: 10px; }
+  .note { font-size: 14px; color: var(--gris); }
+
+  /* Valeurs */
+  .valeurs-grille { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--filet); }
+  .valeurs-grille div { padding: 28px 28px 0 0; }
+  .valeurs-grille div + div { padding-left: 28px; border-left: 1px solid var(--filet); }
+  .valeurs-grille h3 { color: var(--nuit); }
+  .valeurs-grille p { margin-top: 10px; color: var(--gris); max-width: 34ch; }
+  .qui { margin-top: 48px; max-width: 70ch; }
+  .qui p + p { margin-top: 14px; }
+
+  /* Actualités */
+  .actus { padding-top: 0; }
+  .actus-tete { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+  .actus-grille { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .actu { border-top: 3px solid var(--nuit); padding-top: 18px; }
+  .actu time { font-size: 14px; color: var(--gris); }
+  .actu h3 { font-size: 23px; margin-top: 8px; }
+  .actu a { text-decoration: none; }
+  .actu a:hover h3 { text-decoration: underline; text-decoration-color: var(--soleil); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+  .actu p { margin-top: 10px; color: var(--gris); font-size: 16px; }
+
+  /* Contact */
+  .contact { background: var(--nuit); color: var(--blanc); }
+  .contact h2 { color: var(--blanc); }
+  .contact-grille { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .contact p { margin-top: 20px; max-width: 50ch; color: rgba(255,255,255,.88); }
+  .contact .actions { margin-top: 32px; }
+  .contact dl { border-top: 1px solid rgba(255,255,255,.22); }
+  .contact dl div { display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+  .contact dt { color: rgba(255,255,255,.7); }
+  .contact dd { text-align: right; }
+
+  footer { padding-block: 40px 56px; font-size: 14px; color: var(--gris); }
+  .pied { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  .pied ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .pied a { text-decoration: none; }
+  .pied a:hover { text-decoration: underline; }
+  .mention { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--filet); }
+
+  @media (max-width: 960px) {
+    .menu-btn { display: inline-block; }
+    nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--blanc); border-bottom: 1px solid var(--filet); padding: 12px 24px 20px; }
+    nav.ouvert { display: block; }
+    nav > ul { flex-direction: column; gap: 0; }
+    .sous { display: block; position: static; box-shadow: none; border: 0; padding: 0 0 8px 14px; min-width: 0; }
+    nav li > button { cursor: default; font-weight: 700; }
+    .hero-grille, .contact-grille { grid-template-columns: 1fr; }
+    .scene { justify-self: center; max-width: 380px; }
+    .panneaux, .chiffres-grille, .temoignages-grille, .services-grille, .actus-grille { grid-template-columns: 1fr; }
+    .panneau { min-height: 0; }
+    .valeurs-grille { grid-template-columns: 1fr; }
+    .valeurs-grille div, .valeurs-grille div + div { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--filet); }
+    .droite .btn.clair { display: none; }
+  }
+</style>
+</head>
+<body>
+<a class="saut" href="#contenu">Aller au contenu principal</a>
+
+<header>
+  <div class="conteneur barre">
+    <a class="logo" href="#">Hestia<span>.</span> Courtage</a>
+    <nav id="nav" aria-label="Navigation principale">
+      <ul>
+        <li>
+          <button type="button" aria-haspopup="true">Vos besoins</button>
+          <ul class="sous">
+            <li><a href="#besoins">Particuliers</a></li>
+            <li><a href="#besoins">Entreprises</a></li>
+            <li><a href="#besoins">Indépendants et TNS</a></li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" aria-haspopup="true">Nos spécialisations</button>
+          <ul class="sous">
+            <li><a href="#besoins">Professionnels de l'immobilier</a></li>
+            <li><a href="#besoins">Construction et BTP</a></li>
+            <li><a href="#besoins">Transport et logistique</a></li>
+            <li><a href="#besoins">International</a></li>
+          </ul>
+        </li>
+        <li><a href="#groupe">Le groupe</a></li>
+        <li><a href="#actualites">Actualités</a></li>
+      </ul>
+    </nav>
+    <div class="droite">
+      <button class="btn clair" type="button" data-cobrowse>Guidage en direct</button>
+      <a class="btn" href="#espace-client">Espace client</a>
+      <button class="btn clair menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="contenu">
+  <div class="hero">
+    <div class="conteneur hero-grille">
+      <div>
+        <h1>Votre courtier indépendant, au plus près de vos risques.</h1>
+        <p>Particulier, dirigeant ou indépendant : nous comparons le marché, négociez avec vous vos garanties et restons à vos côtés le jour d'un sinistre.</p>
+        <div class="actions">
+          <a class="btn" href="#besoins">Découvrir nos solutions</a>
+          <button class="btn clair" type="button" data-cobrowse>Être guidé en direct</button>
+        </div>
+      </div>
+      <svg class="scene" viewBox="0 0 520 460" role="img" aria-label="Illustration : une montgolfière au-dessus de collines">
+        <circle cx="410" cy="90" r="46" fill="#f4b73f"/>
+        <path d="M0 400 C90 330 190 340 270 380 C350 420 440 330 520 360 L520 460 L0 460Z" fill="#c9d4f4"/>
+        <path d="M0 430 C110 380 230 410 330 430 C400 445 470 410 520 400 L520 460 L0 460Z" fill="#1b2559"/>
+        <g class="ballon">
+          <path d="M215 60 C120 60 90 150 130 220 C150 250 180 268 200 280 L260 280 C280 268 310 250 330 220 C370 150 340 60 245 60Z" fill="#1b2559"/>
+          <path d="M245 60 C200 100 190 200 218 280 L272 280 C300 200 290 100 245 60Z" fill="#f4b73f"/>
+          <path d="M130 220 C150 250 180 268 200 280 L218 280 C190 250 170 200 168 150 C150 170 130 190 130 220Z" fill="#e9eefb"/>
+          <path d="M360 190 C364 210 330 250 300 270 L272 280 C300 200 290 100 245 60 C320 70 365 130 360 190Z" fill="#e9eefb" opacity=".0"/>
+          <line x1="212" y1="280" x2="222" y2="318" stroke="#1b2559" stroke-width="3"/>
+          <line x1="262" y1="280" x2="254" y2="318" stroke="#1b2559" stroke-width="3"/>
+          <rect x="212" y="318" width="52" height="34" rx="6" fill="#8a5a2b"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <section id="besoins">
+    <div class="conteneur">
+      <div class="besoins-tete">
+        <h2>Une solution pour chaque situation.</h2>
+        <p>Nous identifions vos besoins, interrogeons les assureurs et vous recommandons la couverture la plus adaptée.</p>
+      </div>
+      <div class="panneaux">
+        <article class="panneau p1">
+          <h3>Particuliers</h3>
+          <p>Habitation, santé, prévoyance, épargne : un conseiller vous explique vos garanties en termes simples et vous aide à choisir.</p>
+          <a class="btn" href="#contact">Découvrir nos solutions</a>
+        </article>
+        <article class="panneau p2">
+          <h3>Entreprises</h3>
+          <p>Biens, responsabilités, flotte automobile, santé et prévoyance de vos salariés : nous protégeons durablement votre activité.</p>
+          <a class="btn" href="#contact">Découvrir nos solutions</a>
+        </article>
+        <article class="panneau p3">
+          <h3>Indépendants et TNS</h3>
+          <p>Gérant ou mandataire social, vous avez besoin d'une protection sur mesure : prévoyance, complémentaire santé et retraite.</p>
+          <a class="btn" href="#contact">Découvrir nos solutions</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="chiffres">
+    <div class="conteneur chiffres-grille">
+      <div><strong>8 000</strong><span>entreprises clientes nous font confiance</span></div>
+      <div><strong>250 000</strong><span>bénéficiaires couverts par nos contrats</span></div>
+      <div><strong>4,7 / 5</strong><span>note moyenne de notre application mobile</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="conteneur">
+      <h2>Ce que disent nos clients.</h2>
+      <div class="temoignages-grille">
+        <figure class="grand">
+          <blockquote>Nous avons un interlocuteur qui connaît notre entreprise. Quand nos besoins évoluent, il anticipe et nous propose la bonne adaptation.</blockquote>
+          <figcaption><strong>Camille Marchand</strong>Directrice générale, société de transport</figcaption>
+        </figure>
+        <figure>
+          <blockquote>Réactifs, clairs, disponibles. Un vrai suivi de notre dossier.</blockquote>
+          <figcaption><strong>Antoine Reynaud</strong>Cofondateur, atelier de menuiserie</figcaption>
+        </figure>
+        <figure>
+          <blockquote>Mon sinistre a été pris en charge dès le premier appel.</blockquote>
+          <figcaption><strong>Sophie Lemoine</strong>Cliente particulier</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="espace-client">
+    <div class="conteneur">
+      <h2>Vos services au quotidien.</h2>
+      <div class="services-grille">
+        <article class="service">
+          <div class="grand-chiffre">48 h</div>
+          <h3>Remboursement express</h3>
+          <p>Pour vos soins en médecine douce, déposez votre demande depuis votre espace assuré et soyez remboursé sous 48 heures.</p>
+          <p class="note">Pour toute demande déposée avant 16 h, hors week-end et hors délai bancaire.</p>
+          <a class="btn" href="#contact">Accéder à mon espace assuré</a>
+        </article>
+        <article class="service">
+          <div class="grand-chiffre">24 h / 24</div>
+          <h3>Application mobile</h3>
+          <p>Consultez vos remboursements, demandez un devis, téléchargez votre attestation de tiers payant : tout est dans votre poche.</p>
+          <a class="btn" href="#contact">Télécharger l'application</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="groupe">
+    <div class="conteneur">
+      <h2>Humanisme, expertise, agilité.</h2>
+      <div class="valeurs-grille">
+        <div><h3>L'humanisme</h3><p>Chaque client est écouté par une personne, pas par un formulaire.</p></div>
+        <div><h3>L'expertise</h3><p>Des équipes spécialisées par métier et par type de risque.</p></div>
+        <div><h3>L'agilité</h3><p>Une organisation qui s'adapte vite à vos changements.</p></div>
+      </div>
+      <div class="qui">
+        <p>Hestia Courtage aide les particuliers et les professionnels à identifier leurs besoins et à choisir les solutions les plus adaptées à leur quotidien.</p>
+        <p>Nos équipes restent proches de vous et vous accompagnent de manière continue, y compris en cas de sinistre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="actus" id="actualites">
+    <div class="conteneur">
+      <div class="actus-tete">
+        <h2>Actualités.</h2>
+        <a class="btn clair" href="#actualites">Toute l'actualité</a>
+      </div>
+      <div class="actus-grille">
+        <article class="actu">
+          <time datetime="2026-10-19">19 octobre 2026</time>
+          <a href="#actualites"><h3>Une aventure solidaire soutenue par le groupe</h3></a>
+          <p>Rencontre avec l'équipe d'un projet qui allie dépassement de soi et engagement collectif.</p>
+        </article>
+        <article class="actu">
+          <time datetime="2026-10-01">1er octobre 2026</time>
+          <a href="#actualites"><h3>Veille de marché : les sujets brûlants de l'assurance de biens</h3></a>
+          <p>Nos experts décryptent les évolutions tarifaires et les nouvelles exigences des assureurs.</p>
+        </article>
+        <article class="actu">
+          <time datetime="2026-05-27">27 mai 2026</time>
+          <a href="#actualites"><h3>Une nouvelle garantie obligatoire : ce qui change pour vous</h3></a>
+          <p>Ce qu'il faut vérifier dans vos contrats dès maintenant.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="conteneur contact-grille">
+      <div>
+        <h2>Une question sur votre dossier ?</h2>
+        <p>Appelez-nous ou écrivez-nous. Si vous préférez, votre conseiller peut suivre votre écran en direct pour vous guider pas à pas sur cette page, avec votre accord et à tout moment.</p>
+        <div class="actions">
+          <button class="btn soleil" type="button" data-cobrowse>Être guidé en direct</button>
+        </div>
+      </div>
+      <dl>
+        <div><dt>Accueil téléphonique</dt><dd>Du lundi au vendredi, 8 h à 18 h 30</dd></div>
+        <div><dt>Accueil sur site</dt><dd>Du lundi au vendredi, 8 h 30 à 17 h</dd></div>
+        <div><dt>Téléphone</dt><dd>01 23 45 67 89</dd></div>
+        <div><dt>Siège</dt><dd>2 rue de l'Exemple, 67000 Strasbourg</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="conteneur">
+    <div class="pied">
+      <ul>
+        <li><a href="#contact">Nous contacter</a></li>
+        <li><a href="#contact">Réclamations</a></li>
+        <li><a href="#contact">Questions fréquentes</a></li>
+      </ul>
+      <ul>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+    <p class="mention">Hestia Courtage est une marque fictive créée pour une démonstration 8x8 Co-browse. Chiffres, témoignages et coordonnées sont des exemples. Aucune offre d'assurance réelle n'est proposée sur cette page.</p>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile
+  var btn = document.getElementById('menu-btn'), nav = document.getElementById('nav');
+  btn.addEventListener('click', function () {
+    var ouvert = nav.classList.toggle('ouvert');
+    btn.setAttribute('aria-expanded', ouvert);
+  });
+
+  // Ouvre la popup Co-browse (fonction fournie par le script 8x8 chargé plus bas)
+  document.querySelectorAll('[data-cobrowse]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (window.coBrowsingInstance) { window.coBrowsingInstance.showPopup(); }
+      else { alert("Le guidage en direct n'est pas disponible pour le moment. Vérifiez que ce site est bien autorisé sur la licence, puis réessayez."); }
+    });
+  });
+</script>
+
+<!-- ========== 8x8 Co-browse : à garder juste avant </body> ========== -->
+<script>
+window.CoBrowsingCustomStrings = {
+  "popup-title": "Guidage en direct",
+  "popup-close": "X",
+  "popup-start-information": "Cliquez sur Démarrer, puis communiquez le numéro de session ci-dessous à votre conseiller.",
+  "popup-sync-information": "Une autre page est peut-être déjà synchronisée. Cliquez sur Synchroniser pour synchroniser cette page à la place.",
+  "popup-session-id-label": "Numéro de session : ",
+  "popup-start-button": "Démarrer",
+  "popup-stop-button": "Arrêter",
+  "popup-end-session-button": "Terminer la session",
+  "popup-close-button": "Fermer",
+  "popup-sync-button": "Synchroniser",
+  "popup-status-label": "Statut : ",
+  "popup-powered-by-8x8": "Propulsé par 8x8",
+  "status-not-started": "Session non démarrée.",
+  "status-connecting": "Connexion en cours...",
+  "status-ready": "Connecté",
+  "status-connected": "Connecté",
+  "status-replica-disconnected": "En attente de votre conseiller...",
+  "status-ended": "Votre conseiller a terminé la session.",
+  "status-disconnected": "Déconnecté",
+  "status-sync-required": "Synchronisation requise",
+  "status-connection-error": "Connexion instable",
+  "status-invalid-license": "Licence invalide",
+  "status-limited-license": "Tous nos conseillers sont occupés, veuillez réessayer plus tard.",
+  "status-invalid-domain-for-license": "Domaine non autorisé pour cette licence",
+  "status-disabled-license": "Licence désactivée"
+};
+</script>
+<script>
+(function(e,i,g,h,t,c,o,b,r,w){r=i.createElement(g);r.setAttribute(h,c);
+o&&Object.keys(o).map(function(k){r.setAttribute(k,o[k])});
+r.async=1;r.src='https://'+t+'/license'+c+'/dist/primary-bundle.js';
+w=i.getElementsByTagName(g)[0];w.parentNode.insertBefore(r,w);
+})(window,document,'script','data-8x8-co-browsing','cb.8x8.com','64b191796da2a0004d8021b6',{
+  'data-8x8-co-browsing-mode':'full-control'
+});
+</script>
+</body>
+</html>
